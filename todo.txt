@@ -1,0 +1,64 @@
+
+GAME_INPUT
+function ReadImage(){ //call every 0.5 sec
+//DO MAGIC
+	if (isMyTurn){
+		GetAction()
+	}
+
+}
+
+function GetAction(){
+	Action action = Game_AI.GetAction(sakldaklsd);
+	PerformAction(action);
+}	
+
+
+function PerformAction(Action action){
+	//DO MAGIC
+}
+
+
+GAME
+Player[] players
+
+function InitGame(int playerCount, OTHER_STUFF){
+	players = new Player[playerCount];
+}
+
+function UpdateLoop{
+	
+}
+
+
+
+
+
+
+
+GAME_AI.CS /JAVA
+
+enum Stage{
+	Pre-flop, Flop, Turn, River
+}
+
+enum ActionType{
+	Fold, Call, Raise, Check
+}
+
+class Action {
+	ActionType actionType
+	int value;	
+}
+
+function StartGame(int numberPlayers, int playerPosition){
+	
+}
+
+function GetAction(int[] playersMoney, bool[] playerFolded, int[] raisedMoney, int potSize, int dealerPosition, Stage stage){
+
+	//Calculate Action action	
+
+	return action	
+}
+
