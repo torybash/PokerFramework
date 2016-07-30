@@ -14,9 +14,15 @@ import pf.util.GameHelper;
 public class Game {
 	
 	
+	public enum GameRound{
+		PRE_FLOP,
+		FLOP,
+		TURN,
+		RIVER
+	}
+
 	
-
-
+	GameRound gameRound;
 	
 	ArrayList<Player> playerList;
 	
@@ -90,6 +96,7 @@ public class Game {
 	public void StartGame(int playerCount){
 		System.out.println("----STARTED GAME-----");
 		
+		gameRound = GameRound.PRE_FLOP;
 		playerList = new ArrayList<Player>();
 		for (int i = 0; i < playerCount; i++) {
 			Player player = new Player(1200);
@@ -106,8 +113,32 @@ public class Game {
 		
 	}
 	
-	private boolean BettingRound(){
-		return false;
+	private void BettingRound(){
+		boolean betting = true;
+		int currentPlayerIdx = dealerPosition;
+//		if (gameRound == GameRound.PRE_FLOP) 
+		
+		
+		
+		
+		while(betting){
+			
+		}
+//		for (int i = 0; i < playerList.size(); i++) {
+//			Player p = playerList.get(i);
+//			if (p.bettingsState == Player.BettingState.FOLDED) continue;
+//		}
+	}
+	
+	private int GetNextActivePlayerIndex(int startIdx){
+		int currentIdx = startIdx;
+		while (true){
+			currentIdx++;
+			if (currentIdx == playerList.size()) currentIdx = 0;
+			if (currentIdx == startIdx) return -1;
+			if (playerList.get(currentIdx).bettingsState != Player.BettingState.NORMAL) continue;
+			return currentIdx;
+		}
 	}
 	
 	private void PlayTurn(){
@@ -135,40 +166,12 @@ public class Game {
 		playerList.get(bigBlindIdx).PutBet(blinds.currentBigBlind);
 		
 		
-		///TESTING
-		for (int i = 0; i < 5; i++) {
-			tableCardList.add(deck.TakeCard());
-		}
-		
-		System.out.println("Table cards: " + Arrays.toString(tableCardList.toArray()));
-		
-		int bestVal = -1; int wonPlayerIdx = -1; //TODO multiple winners
-		for (int i = 0; i < playerList.size(); i++) {
-			Player p = playerList.get(i);
-			
-			Card[] playerHand = new Card[7];
-			for (int j = 0; j < 2; j++) playerHand[j] = p.holeCards[j];
-			for (int j = 2; j < 7; j++) playerHand[j] = tableCardList.get(j - 2);
-			
-			Card[] resultCards = new Card[5];
-			int val = GameHelper.GetBestHand((Card[]) playerHand, resultCards);
-			
-			if (val > bestVal){
-				bestVal = val;
-				wonPlayerIdx = i;
-			}
-			
-			System.out.println("Player " + i + " - best cards: "+ Arrays.toString(resultCards) + ", val: " + val);
-		}
-		
-		System.out.println("Player " + wonPlayerIdx + " WON!!!!");
-		
-//		PrintState();
-		
-		///TESTING
+
 
 		
 		//Betting round
+		BettingRound();
+		
 		//if !Complete 
 		//	Deal flop
 		//	Betting round
@@ -186,16 +189,40 @@ public class Game {
 		//Change blinds
 		
 		//Change dealerPosition !;
+//		
+//		try {
+//			int red = System.in.read();
+//			System.out.println("red: "+ red);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+	
 		
-		try {
-			int red = System.in.read();
-			System.out.println("red: "+ red);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		///TESTING
+//		for (int i = 0; i < 5; i++) tableCardList.add(deck.TakeCard());
+//		System.out.println("Table cards: " + Arrays.toString(tableCardList.toArray()));
+//		int bestVal = -1; int wonPlayerIdx = -1; //TODO multiple winners
+//		for (int i = 0; i < playerList.size(); i++) {
+//			Player p = playerList.get(i);
+//			Card[] playerHand = new Card[7];
+//			for (int j = 0; j < 2; j++) playerHand[j] = p.holeCards[j];
+//			for (int j = 2; j < 7; j++) playerHand[j] = tableCardList.get(j - 2);
+//			Card[] resultCards = new Card[5];
+//			int val = GameHelper.GetBestHand((Card[]) playerHand, resultCards);
+//			if (val > bestVal){
+//				bestVal = val;
+//				wonPlayerIdx = i;
+//			}
+//			System.out.println("Player " + i + " - best cards: "+ Arrays.toString(resultCards) + ", val: " + val);
+//		}
+//		System.out.println("Player " + wonPlayerIdx + " WON!!!!");
 		
+//		PrintState();
+		
+		///TESTING
 	}
+	
 	
 	private void PrintState(){
 		System.out.println("Game State - players: ");

@@ -2,10 +2,17 @@ package pf.game;
 
 public class Player {
 	
-	public Card[] holeCards;
+	public enum BettingState{
+		NORMAL,
+		FOLDED
+	}
 	
+	public Card[] holeCards;
+	public BettingState bettingsState;
+
 	private int chips;
 	private int currentBet;
+	
 	
 	public int getChips() {
 		return chips;
@@ -14,6 +21,7 @@ public class Player {
 	public int getCurrentBet() {
 		return currentBet;
 	}
+	
 
 	public Player(int startChips){
 		chips = startChips;
