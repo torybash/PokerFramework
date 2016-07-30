@@ -7,11 +7,12 @@ public class Main {
 
 	
 	public static void main(String[] args) {
-		System.out.println("WHAT THE WORLD!");
 		
 		Game gam = new Game();
 
-		gam.StartGame(6);
+		gam.StartGame(4);
+		
+		
 		
 		
 		//Deck deck = new Deck();

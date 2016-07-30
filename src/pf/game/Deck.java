@@ -15,11 +15,12 @@ public class Deck {
 		for (int i = 0; i < 52; i++) {
 			Card card = new Card();
 			card.cardSuit = CardSuit.values()[i / 13];
-			card.number = i % 13 + 1;
+			card.number = i % 13;
 			
 			cardList.add(card);
 		}
 	}
+	
 	
 	
 	
